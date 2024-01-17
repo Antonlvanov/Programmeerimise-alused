@@ -38,7 +38,7 @@
 # #Leidke järgnevast näiteprogrammist semantiline viga:
 # aeg = float(input("Mitu tundi kulus sõiduks? "))
 # teepikkus = float(input("Mitu kilomeetrit sõitsid? "))
-# kiirus = aeg / teepikkus #viga
+# kiirus = aeg / teepikkus #viga, õige on teepikkus/aeg
 # print("Sinu kiirus oli " + str(kiirus) + " km/h")
 
 # #7
