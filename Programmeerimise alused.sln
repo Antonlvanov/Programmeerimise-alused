@@ -7,6 +7,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Funktsioonide print(),input
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Iseseisev töö Vigade otsing 1", "Iseseisev töö Vigade otsing 1\Iseseisev töö Vigade otsing 1.pyproj", "{969BF73B-73BE-458A-AC65-AD9EA183219C}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Iseseisev töö Vigade otsing 1 (1)", "Iseseisev töö Vigade otsing 1 (1)\Iseseisev töö Vigade otsing 1 (1).pyproj", "{0CBED605-083A-44F7-8145-752A76F28EB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,8 @@ Global
 		{DB8972E8-24CD-44C9-881D-E7F2F0109C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969BF73B-73BE-458A-AC65-AD9EA183219C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{969BF73B-73BE-458A-AC65-AD9EA183219C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBED605-083A-44F7-8145-752A76F28EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBED605-083A-44F7-8145-752A76F28EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
