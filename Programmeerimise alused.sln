@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Funktsioonide print(),input(), float(), int() kasutamine", "Funktsioonide print(),input(), float(), int() kasutamine\Funktsioonide print(),input(), float(), int() kasutamine.pyproj", "{DB8972E8-24CD-44C9-881D-E7F2F0109C0C}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Iseseisev töö Vigade otsing 1", "Iseseisev töö Vigade otsing 1\Iseseisev töö Vigade otsing 1.pyproj", "{969BF73B-73BE-458A-AC65-AD9EA183219C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DB8972E8-24CD-44C9-881D-E7F2F0109C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB8972E8-24CD-44C9-881D-E7F2F0109C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969BF73B-73BE-458A-AC65-AD9EA183219C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969BF73B-73BE-458A-AC65-AD9EA183219C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
