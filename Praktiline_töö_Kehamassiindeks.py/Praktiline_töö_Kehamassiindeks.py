@@ -9,7 +9,6 @@ else:
     if number==1 :
         try:
             pikkus=float(input("Palun sisestage oma pikkus. "))
-            pikkus==0
         except ValueError:
             print("Viga! Palun sisestage kehtiv number.")
             exit(0)
