@@ -12,10 +12,12 @@ else:
             pikkus==0
         except ValueError:
             print("Viga! Palun sisestage kehtiv number.")
+            exit(0)
         try:
             mass=float(input("Palun sisestage oma kaal. "))
         except ValueError:
             print("Viga! Palun sisestage kehtiv number.")
+            exit(0)
         index=round(mass/(0.01*pikkus)**2,1)
         print(nimi+"! Sinu keha indeks on: "+str(index))
         if index<=16:
