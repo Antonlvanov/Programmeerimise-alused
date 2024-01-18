@@ -1,15 +1,10 @@
 ﻿import math # viga
-
-def sisend(andmed, andmetüüp): # andmete tüüp kontrollimine
-    while True:
-        sisend_väärtus = input(andmed)
-        try:
-            return andmetüüp(sisend_väärtus)
-        except ValueError:
-            print("Viga! Palun sisestage õige tüüpi andmed.")
-
 print("Ruudu karakteristikud")
-a=sisend('Sisesta ruudu külje pikkus => ', float)
+try:
+    a=float(input('Sisesta ruudu külje pikkus => '))
+except ValueError:
+    print("Viga! Palun sisestage kehtiv number.")
+    exit(0)
 S=a**2
 print("Ruudu pindala", round(S,2))
 P=4*a
@@ -18,8 +13,16 @@ di=a*math.sqrt(2)
 print("Ruudu diagonaal", round(di,2))
 # print() #ei ole vaja
 print('\n'"Ristküliku karakteristikud") #viga )
-b=sisend("Sisesta ristküliku 1. külje pikkus => ", float)
-c=sisend("Sisesta ristküliku 2. külje pikkus => ", float)
+try:
+    b=float(input("Sisesta ristküliku esimene külje pikkus => "))
+except ValueError:
+    print("Viga! Palun sisestage kehtiv number.")
+    exit(0)
+try:
+    c=float(input("Sisesta ristküliku teine külje pikkus => "))
+except ValueError:
+    print("Viga! Palun sisestage kehtiv number.")
+    exit(0)
 S=b*c
 print("Ristküliku pindala", round(S,2)) #viga '/" "
 P=2*(b+c) #* on vajalik
@@ -28,7 +31,11 @@ di=math.sqrt(b**2+c**2) # (b*2+c*2) >> (b**2+c**2)
 print("Ristküliku diagonaal", round(di,2))
 # print() #ei ole vaja
 print('\n'"Ringi karakteristikud")
-r=sisend("Sisesta ringi raadiusi pikkus =>", float)
+try:
+    r=float(input("Sisesta ringi raadiusi pikkus =>"))
+except ValueError:
+    print("Viga! Palun sisestage kehtiv number.")
+    exit(0)
 d=2*r #* on vajalik
 print("Ringi läbimõõt", round(d,2)) # ,
 S=math.pi*(r**2) # S=pi()*r*2 >> S=math.pi*(r**2)
