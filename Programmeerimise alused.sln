@@ -11,6 +11,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Tingimuslik operaator IF", 
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Praktiline_töö_Kehamassiindeks.py", "Praktiline_töö_Kehamassiindeks.py\Praktiline_töö_Kehamassiindeks.py.pyproj", "{25E21CCB-6D1C-444B-B48E-7D51D9EF39EF}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "10 практических заданий по теме Циклы", "10 практических заданий по теме Циклы\10 практических заданий по теме Циклы.pyproj", "{C00CC9F4-7483-46F1-A88A-C83C7A3A84B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,8 @@ Global
 		{FA329522-5D7E-4FD9-9E21-26650FB72B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25E21CCB-6D1C-444B-B48E-7D51D9EF39EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25E21CCB-6D1C-444B-B48E-7D51D9EF39EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00CC9F4-7483-46F1-A88A-C83C7A3A84B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00CC9F4-7483-46F1-A88A-C83C7A3A84B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

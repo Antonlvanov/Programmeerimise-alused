@@ -1,4 +1,4 @@
-﻿﻿#1
+﻿#1
 #for
 r=0
 for i in range(15):
