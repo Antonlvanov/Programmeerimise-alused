@@ -1,4 +1,4 @@
-﻿import math # viga
+﻿from math import *
 print("Ruudu karakteristikud")
 try:
     a=float(input('Sisesta ruudu külje pikkus => '))
