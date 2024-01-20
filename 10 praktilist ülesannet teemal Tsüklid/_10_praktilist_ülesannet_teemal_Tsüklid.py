@@ -1,115 +1,112 @@
-﻿#1
-#for
-r=0
-for i in range(15):
-    arv=float(input("sisesta {0} arv: ".format(i+1)))
-    d=0
-    if arv==int(arv):
-        r+=1
-print("Täisarvude arv on "+str(r))
-# #while True
+﻿# #1
+# #for
+# count=0
+# for i in range(15):
+#     arv=float(input("sisesta {0} arv: ".format(i+1)))
+#     d=0
+#     if arv==int(arv):
+#         count+=1
+# print("Täisarvude arv on "+str(count))
+
+# #while true
 # r=0
 # i=0
-# while True:
-#     arv=float(input("Sisesta {0} arv ".format(i)))
+# while true:
+#     arv=float(input("sisesta {0} arv ".format(i)))
 #     i+=1
 #     if arv==int(arv):
 #         r+=1
 #     if i==15: break
-# print("Täisarvude arv on " +str(r))
+# print("täisarvude arv on " +str(r))
 
 # #while tingimustega
 # r=0
 # i=1
 # while i<16:
-#     arv=float(input("Sisesta {0} arv: ".format(i)))
+#     arv=float(input("sisesta {0} arv: ".format(i)))
 #     i+=1
 #     if arv==int(arv):
 #         r+=1
-# print("Täisarvude arv on " +str(r))
+# print("täisarvude arv on " +str(r))
 
 # #2
-# A=int(input("Sisesta arv: "))
+# a=int(input("sisesta arv: "))
 # i=1
 # count=0
-# while i<A:
+# while i<a:
 #     count+=i
 #     i+=1
 #     print(count)
-# print("Summa on: "+str(count))
+# print("summa on: "+str(count))
 
-# # Задание 3
-# numbers = [float(input("Введите число: ")) for _ in range(8)]
-# product = 1
-
+# #3
+# numbers = [float(input("введите число: ")) for i in range(8)]
+# count = 1
 # for num in numbers:
 #     if num > 0:
-#         product *= num
+#         count *= num
+# print("Произведение положительных чисел: ", count)
 
-# print("Произведение положительных чисел:", product)
-
-# # Задание 4
+# #4
 # for i in range(10, 21):
 #     print(i**2)
 
-# # Задание 5
-# N = int(input("Введите количество чисел: "))
-# sum_negatives = 0
-
-# for _ in range(N):
+# #5
+# n = int(input("Введите количество чисел: "))
+# sum_neg = 0
+# for i in range(n):
 #     num = float(input("Введите число: "))
 #     if num < 0:
-#         sum_negatives += num
+#         sum_neg += num
+# print("Cумма отрицательных чисел:", sum_neg)
 
-# print("Сумма отрицательных чисел:", sum_negatives)
-
-# # Задание 6
+# #6
 # N = int(input("Введите количество чисел: "))
-# negatives = 0
-# positives = 0
+# neg = 0
+# pos = 0
 # zeros = 0
-
-# for _ in range(N):
-#     num = float(input("Введите число: "))
+# for i in range(N):
+#     num=float(input("Введите число: "))
 #     if num < 0:
-#         negatives += 1
+#         neg += 1
 #     elif num > 0:
-#         positives += 1
+#         pos += 1
 #     else:
 #         zeros += 1
-
-# print("Отрицательных:", negatives)
-# print("Положительных:", positives)
+# print("\n""Отрицательных:", neg)
+# print("Положительных:", pos)
 # print("Нулей:", zeros)
 
-# # Задание 7
+# #7
 # A = int(input("Введите начало промежутка: "))
 # B = int(input("Введите конец промежутка: "))
 # K = int(input("Введите K: "))
-
 # for num in range(A, B + 1):
 #     if num % K == 0:
 #         print(num)
 
-# # Задание 8
+# #8
 # for inches in range(1, 21):
-#     centimeters = inches * 2.54
-#     print(f"{inches} дюймов = {centimeters:.2f} см")
+#     centimeters = inches * 2.5
+#     if inches == 1:
+#         print(f"{inches} дюйм = {centimeters:.2f} см")
+#     elif 1 < inches < 5:
+#         print(f"{inches} дюйма = {centimeters:.2f} см")
+#     else:
+#         print(f"{inches} дюймов = {centimeters:.2f} см")
 
-# # Задание 9
+# #9
 # S = float(input("Введите сумму вклада: "))
-# N = int(input("Введите количество лет: "))
-# interest_rate = 3 / 100
+# years = int(input("Введите период (в годах): "))
+# rate = 0.03
+# for i in range(years):
+#     S+=S*rate
+# print("Через", years, "лет сумма составит:", round(S,2))
 
-# for _ in range(N):
-#     S += S * interest_rate
-
-# print("Сумма вклада через", N, "лет составит:", S)
-
-# # Задание 10
-# for _ in range(10):
-#     num1 = float(input("Введите первое число: "))
-#     num2 = float(input("Введите второе число: "))
+#10
+for _ in range(10):
+    num1 = float(input("Введите первое число: "))
+    num2 = float(input("Введите второе число: "))
     
-#     max_number = max(num1, num2)
-#     print("Большее из чисел:", max_number)
+    max_number = max(num1, num2)
+    print("Большее из чисел:", max_number)
