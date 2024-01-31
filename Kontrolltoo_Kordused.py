@@ -50,6 +50,7 @@ try:
     kasutaja_arv = int(userinput)
 except ValueError:
     print("Palun sisesta õige arv.")
+    exit(0)
 n_c=0
 p_c=0
 for i in range (len(str(userinput))):
@@ -59,6 +60,6 @@ for i in range (len(str(userinput))):
             n_c+=1
         if int(substring)%2!=0:
             p_c+=1
-print(f"sisestatud naturaalarvu paarisarv: {p_c}")
-print(f"paaritud numbrid sisestatud naturaalarv: {n_c}")  
+print(f"Sisestatud naturaalarvu paarisarv: {p_c}")
+print(f"Paaritud numbrid sisestatud naturaalarv: {n_c}")  
         
