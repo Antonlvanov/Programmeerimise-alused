@@ -62,4 +62,15 @@ for i in range (len(str(userinput))):
             p_c+=1
 print(f"Sisestatud naturaalarvu paarisarv: {p_c}")
 print(f"Paaritud numbrid sisestatud naturaalarv: {n_c}")  
-        
+
+#5
+
+A=int(input("Sisesta A väärtus: "))
+B=int(input("Sisesta B väärtus: "))
+if A > B:
+    print("Viga: A peab olema väiksem või võrdne B-ga.")
+else:
+    sum_result = 0
+    for num in range(A, B + 1):
+        sum_result += num
+print(f"Astme summa A kuni B: {sum_result}")       
