@@ -4,15 +4,14 @@ try:
     kasutaja_arv = int(userinput)
 except ValueError:
     print("Palun sisesta ainult arvud.")
-esi1="   /V\    "
-esi2="   /V\    "
-esi3="   /V\    "
-esi4="   /V\    "
 for i in range(1):
+        print(" ")
+        print("    X     "*kasutaja_arv)
         print("   /V\    "*kasutaja_arv)
         print("  / V \   "*kasutaja_arv)
         print(" / V V \  "*kasutaja_arv)
         print("/VV V VV\ "*kasutaja_arv)
+        print(" ")
 
 #2
 R = input("Sisesta arv: ")
@@ -22,14 +21,11 @@ try:
 except ValueError:
     print("Palun sisesta ainult arvud.")
     exit(0)
-if (R%2==0):
-    R-1
-    for i in range(1, R, 2):
-            result *= i
-else:
-    for i in range(1, R, 2):
-            result *= i
-print("Paaritute väärtuste korrutis 0 kuni", R, ":", result)
+if kasutaja_arv%2==0:
+    kasutaja_arv-1
+for i in range(1, kasutaja_arv+1, 2):
+        result *=i
+print("Paaritute väärtuste korrutis 0 kuni", kasutaja_arv, ":", result)
 
 #3
 import random
