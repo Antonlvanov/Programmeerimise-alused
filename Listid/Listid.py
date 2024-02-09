@@ -61,7 +61,7 @@ while True:
             print("ei ole nimi")
                 
 
-﻿# #1
+﻿#1
 
 glas = list("aeiouõäöüAEIOUÕÄÖÜаеёиоуыэюяАЕЁИОУЫЭЮЯ")
 sogl = list("bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZбвгджзйклмнпрстфхцчшщБВГДЖЗЙКЛМНПРСТФХЦЧШЩ")
@@ -91,7 +91,7 @@ while True:
     print(f"Tühikud: {space}")
 
 
-2
+# 2
 import random
 names = ['Juhan','Kati','Mario','Mario','Mati','Mati']
 print("Antud list: ", names)
