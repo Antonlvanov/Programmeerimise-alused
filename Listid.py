@@ -147,19 +147,19 @@ else:
 import random
 amount=random.randint(10, 40)
 numbers=[random.randint(1, 100) for i in range(amount)]
-numbers.sort()
 print(numbers)
 while True:
     numbers.sort()
+    print(numbers)
     max=numbers[amount-1]
     newmax=round(max/amount,1)
-    print("Maksimaalne arv: " , max, "Loendis umbrite arv: ", amount)
-    print("Jagamise tulemus: ", round(max/amount))
-    numbers.insert(numbers.index(max), newmax)
-    numbers.pop()
+    print("Maksimaalne arv:", max, "Loendis umbrite arv:", amount)
+    print("Jagamise tulemus:", round(max/amount,1))
+    numbers[numbers.index(max)]=newmax
+    numbers.sort()
     print(numbers)
 
-    moveon = input("\nVeelkord: (y/n): ")
+    moveon = input("\nVeelkord?: (y/n): ")
     if moveon.lower() == 'n':
         break
     elif moveon.lower() == 'y':
