@@ -1,4 +1,107 @@
-﻿##1
+﻿# Iseseisev töö
+#####################################################################################################
+
+# #7
+# numbers = []
+# narv=int(input("Sisesta soovitud arvude arv: "))
+# while True: 
+#    for i in range(narv):    # Tsükli väärtuste lisamine
+#        try: numbers.append(int(input(f"Sisesta arv {i}: ")))
+#        except: print("Viga")
+#    for i in range(narv):    # Tsükli sortimine absoluutväärtused
+#         for j in range(0, narv-i-1):
+#             if abs(numbers[j]) < abs(numbers[j+1]):
+#                 numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
+#    print("Numbrite nimekiri kasvavas järjestuses: ", numbers)
+#    numbers.reverse()
+#    print("Numbrite nimekiri kahanevas järjestuses: ", numbers)
+#    break
+
+# #8 
+# sarv=int(input("Sisesta soovitud sõnade arv: "))
+# sonad=[]
+# while True: 
+#     for i in range(sarv): # Sõnade loendisse lisamise tsükkel
+#         try: sonad.append(str(input(f"Sisesta sõna {i}: ")))
+#         except: print("Viga")
+#     maxlen=0
+#     for i in range(len(sonad)): # Tsükkel maksimaalse pikkusega sõna määramiseks
+#         if maxlen<len(sonad[i]): 
+#             maxlen=len(sonad[i])
+#     for i in range(len(sonad)): # Sõnade asenduse tsükkel
+#         if int(len(sonad[i]))<maxlen:
+#             sona=sonad[i]+"_"*(maxlen-len(sonad[i]))
+#             sonad.insert(i+1, sona)
+#             sonad.remove(sonad[i])
+#     print ("Uus sama pikkusega stringide loend: \n",sonad)
+#     break
+
+# #9
+# glas = list("aeiouõäöüаеёиоуыэюя")
+# sogl = list("bcdfghjklmnpqrstvwxzбвгджзйклмнпрстфхцчшщ")
+# while True:
+#     try: nimi=str(input("Mis sinu nimi on? \n"))
+#     except: "Viga"
+#     print(f"Tervist, {nimi.capitalize()}!")
+
+#     g_arv = 0
+#     s_arv = 0
+#     nimil=[]
+
+#     for char in nimi:
+#        if char.lower() in glas:
+#            g_arv += 1
+#        elif char.lower() in sogl:
+#            s_arv += 1
+#        if nimil.count(char.lower())==0:
+#            nimil.append(char.lower())
+#     nimil.sort()
+#     print(f"Vokaalide arv nimes: {g_arv}")
+#     print(f"Konsonandide arv nimes: {s_arv}")
+#     print(nimil)
+#     break
+
+# #11
+# while True:
+#     try: n=int(input("Sisestage tähtede arv järjestuses (1-26): "))
+#     except: "Viga"
+#     if 1 > n or n > 26:
+#         print("Vale tähtede arv")
+#         continue
+#     letters = [chr(i+97) for i in range(n)]
+#     print("Järjestus alaregistris olevatest tähtedest:", letters)
+
+#     letters2 = [chr(i+97)*(i+1) for i in range(n)]
+#     print("Järjestus korduvate tähtedega:", letters2)
+
+# #12
+# import random
+# while True:
+#     import random
+#     arvud = [random.randint(1, 100) for i in range(10)] # Luuame loend
+#     for arv in arvud: # Kutsutame loendist samu väärtusi
+#         if arvud.count(arv)>1:
+#             arvud.remove(arv)
+#             arvud.append(random.randint(1, 100)) 
+#     print("Luuatud loend:\n", arvud)
+
+#     maxarv=arvud[arvud.index(max(arvud))] # Saame minimaalse ja maksimaalse väärtuse
+#     minarv=arvud[arvud.index(min(arvud))]
+
+#     indexmax=arvud.index(max(arvud)) # Saame max/min indeksid
+#     indexmin=arvud.index(min(arvud))
+#     print(maxarv," <<->> ",minarv)
+
+#     arvud[indexmax] = minarv # min/max väärtusi vahetamine
+#     arvud[indexmin] = maxarv
+
+#     print("Uus loend:\n", arvud)
+#     input("Veelkord?")
+#     continue
+
+
+
+##1
 
 #glas = list("aeiouõäöüAEIOUÕÄÖÜаеёиоуыэюяАЕЁИОУЫЭЮЯ")
 #sogl = list("bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZбвгджзйклмнпрстфхцчшщБВГДЖЗЙКЛМНПРСТФХЦЧШЩ")
@@ -99,14 +202,14 @@
 #   else:
 #       continue
 
-##3
-#import random
-#arvud=[]
-#rida = int(input("Mitu?"))
-#for p in range(rida):
+# #3
+# import random
+# arvud=[]
+# rida = int(input("Mitu? \n"))
+# for p in range(rida):
 #    arvud.append(random.randint(1,100))
-#print(arvud)
-#for p in range(rida):
+# print(arvud)
+# for p in range(rida):
 #    print(arvud[p]*"*")
 
 
@@ -133,7 +236,7 @@
 #kogus = int(input("Sisestage soovitued elementide arv: "))
 #elementid = [random.randint(1, 100) for i in range(kogus)]
 #vahetada = int(input("Sisestage elementide arv, mida soovite vahetada: "))
-#print("Genereeritud list: ", elementid)
+#print("Luuatud list: ", elementid)
 #if vahetada < 2 or vahetada > len(elementid)//2:
 #    print("Vigane kogus! Palun sisestage vähemalt 2 ja mitte rohkem kui pool elementide arvust.")
 #else:
@@ -166,40 +269,3 @@
 #        numbers.sort()
 #        continue
 
-# Iseseisev töö
-#####################################################################################################
-# #7
-# numbers = []
-# narv=int(input("Sisesta soovitud arvude arv: "))
-# while True: 
-#    for i in range(narv):    # Tsükli väärtuste lisamine
-#        try: numbers.append(int(input(f"Sisesta arv {i}: ")))
-#        except: print("Viga")
-#    for i in range(narv):    # Tsükli sortimine absoluutväärtused mullimeetodi abil
-#         for j in range(0, narv-i-1):
-#             if abs(numbers[j]) < abs(numbers[j+1]):
-#                 numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
-#    print("Numbrite nimekiri kasvavas järjestuses: ", numbers)
-#    numbers.reverse()
-#    print("Numbrite nimekiri kahanevas järjestuses: ", numbers)
-#    break
-
-# #8 
-# import random
-# sarv=int(input("Sisesta soovitud sõnade arv: "))
-# sonad=[]
-# while True: 
-#     for i in range(sarv): # Sõnade loendisse lisamise tsükkel
-#         try: sonad.append(str(input(f"Sisesta sõna {i}: ")))
-#         except: print("Viga")
-#     maxlen=0
-#     for i in range(len(sonad)): # Tsükkel maksimaalse pikkusega sõna määramiseks
-#         if maxlen<len(sonad[i]):
-#             maxlen=len(sonad[i])
-#     for i in range(len(sonad)): # Sõnade asenduse tsükkel
-#         if int(len(sonad[i]))<maxlen:
-#             sona=sonad[i]+"_"*(maxlen-len(sonad[i]))
-#             sonad.insert(i+1, sona)
-#             sonad.remove(sonad[i])
-#     print ("Uus sama pikkusega stringide loend: \n",sonad)
-#     break
