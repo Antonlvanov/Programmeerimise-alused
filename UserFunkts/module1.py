@@ -19,4 +19,4 @@ def arithmetic(arv1:float,arv2:float,tehe:str)->any:
 
 import re
 def checktype(x)->str:
-    return re.search(r"'(.*?)'", str(type(x))).group(1)
+    return str(type(x)).split("'")[1]
