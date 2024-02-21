@@ -1,4 +1,4 @@
-def arithmetic(arv1:float,arv2:float,tehe:str)->any:
+﻿def arithmetic(arv1:float,arv2:float,tehe:str)->any:
     try:
         if tehe == "+":
             tulemus = arv1 + arv2
