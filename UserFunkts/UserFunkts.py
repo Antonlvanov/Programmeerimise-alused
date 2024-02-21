@@ -1,7 +1,6 @@
-from module1 import *
+﻿from module1 import *
 
-s=(float(input("arv 1: ")),float(input("arv 2: ")),str(input("Tehe (+,-,*,:): ")))
-s=arithmetic(*s)
+s=arithmetic(*(float(input("arv 1: ")),float(input("arv 2: ")),str(input("Tehe (+,-,*,:): "))))
 print(s)
-print(checktype(s))
+print(f"andmetüüp: {checktype(s)}")
 

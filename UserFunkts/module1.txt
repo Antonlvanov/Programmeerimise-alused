@@ -12,11 +12,12 @@ def arithmetic(arv1:float,arv2:float,tehe:str)->any:
             if arv2 != 0:
                 tulemus = arv1 / arv2
             else:
-                print("Nulliga jagamine ei ole lubatud.")
+                print("nulliga jagamine ei ole lubatud.")
                 exit(0)
         return float(tulemus)   
     except: return("Vigane tehe")
 
 import re
 def checktype(x)->str:
-    return re.search(r"'(.*?)'", str(type(x))).group(1)
+    r=re.search(r"'(.*?)'", str(type(x)))
+    return r.group(1)
