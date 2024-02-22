@@ -21,9 +21,6 @@ def arithmetic(arv1:float,arv2:float,tehe:str)->any:
     except: 
         return "Vale sisend"
 
-def checktype(x)->str:
-    return str(type(x)).split("'")[1]
-
 #2
 def is_year_leap(year:int)->bool:
     if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
@@ -67,3 +64,4 @@ def bank(a, years):
         return a
     except:
         return "Vale andmed"
+
