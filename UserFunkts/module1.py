@@ -5,7 +5,7 @@ def arithmetic(arv1:float,arv2:float,tehe:str)->any:
     :param float arv1: Sisestab esimene arv.
     :param float arv2: Sisestab teine arv.
     :param str tehe: Sisestab matemaatiline tehe märk.
-    :param tulemus: Sisestab 
+    :param tulemus: Sisestab tulemus
     """
     try:
         if tehe == "+":

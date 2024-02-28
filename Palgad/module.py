@@ -1,4 +1,7 @@
-﻿def inimeste_ja_palkade_lisamine(i:list,p:list,n=1)->any:
+﻿from math import e
+
+#1
+def inimeste_ja_palkade_lisamine(i:list,p:list,n=1)->any:
     """Funktsioon tagastab uuendatud loendid, kus lisatud inimesi ja palka
     param list i: Inimeste järjend
     param list p: Palgate järjend
@@ -14,6 +17,7 @@
                 p.append(palk)
         return i,p
     except: "Vale sisend"
+#0    
 def andmed_veerudes(i:list,p:list):
     """Funktsioon kuvab ekraanile kahe järjendite andmed veerudes
     param list i: Inimeste järjend
@@ -21,7 +25,7 @@ def andmed_veerudes(i:list,p:list):
     """
     for j in range(len(i)):
         print(i[j],"-",p[j]) 
-        
+#2
 def andmete_eemaldamine_nimi_jargi(i:list,p:list)->any:
     """Funktsioon kustutab andmeid ja tagastab listid.
     param list i: Inimeste järjend
@@ -34,49 +38,57 @@ def andmete_eemaldamine_nimi_jargi(i:list,p:list)->any:
             i.remove(nimi)
             p.pop(j)
     return i,p
-
+#3
 def kellel_on_suurim_palk(i:list,p:list)->any:
     """Funktsioon leiab kõige suurim palk
     param list i: Inimeste järjend
     param list p: Palgate järjend
+    param int maxpalk: Sisestab suurem palk
+    param list nimed: Sisestab suurem palk saatjad
     rtype: list, list
     """
-    palk=max(p) 
+    maxpalk=max(p) 
     nimed=[]
     for j in range(p.count(max(p))):
-        nimed.append(i[p.index(max(p),j)])
-    return palk,nimed
-
+        nimed.append(i[p.index(max(p),p.index(max(p))+j)])
+    return maxpalk,nimed
+#4
 def kellel_on_vaiksem_palk(i:list,p:list)->any:
     """Funktsioon leiab kõige väiksem palk 
     param list i: Inimeste järjend
     param list p: Palgate järjend
     rtype: list, list
+    param int maxpalk: Sisestab väiksem palk
+    param list nimed: Sisestab väiksem palk saatjad
     """
-    palk=min(p) 
-    n=p.count(palk) 
-    positsiooni=0
-    print("Minimaalne palk:"+str(palk)) 
-    for j in range(n):
-        ind=p.index(palk,positsiooni)
-        nimi=i[ind] 
-        print(f"{nimi} on minimaalne palk") 
-        positsioni=ind+1 
-        return i,p 
-
-
+    minpalk=min(p) 
+    nimed=[]
+    for j in range(p.count(min(p))):
+        nimed.append(i[p.index(min(p),p.index(min(p))+j)])
+    return minpalk,nimed
+#5
 def sorteeritud_palgad(i:list,p:list):
     """Funktsioon sorteerib palgad
     param list i: Inimeste järjend
     param list p: Palgate järjend
     rtype: list, list
     """
-    for n in range(0,len(i)):
-        for m in range(n,len(i)):
-            if p[n]>p[m]:
-                p[m],p[n]=p[n],p[m]
-                i[m],i[n]=i[n],i[m]
-    return i,p 
+    try:
+        s=int(input("Järjestada palgad kasvavas või kahanevas järjekorras? (1/2): "))
+        if s==1:
+            i.sort()
+            p.sort()
+            return i,p
+        if s==2:
+            i.sort()
+            i.reverse()
+            p.sort()
+            p.reverse()
+            return i,p
+        else:
+            print("Vale sisend")
+    except: print("Vale sisend")
+#6
 
 
 
