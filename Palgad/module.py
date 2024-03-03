@@ -80,10 +80,10 @@ def sorteeritud_palgad(i:list,p:list)->any:
     """
     try:
         for n in range(0,len(i)):
-            for m in range(n,len(i)):
-                if p[n]<p[m]:
-                    p[m],p[n]=p[n],p[m]
-                    i[m],i[n]=i[n],i[m]
+            for j in range(n,len(i)):
+                if p[n]<p[j]:
+                    p[j],p[n]=p[n],p[j]
+                    i[j],i[n]=i[n],i[j]
         s=int(input("Järjestada palgad kahanevas (1) või kasvavas (2) järjekorras?: "))
         if s==1:
             print("Palgad kahanevas järjekorras:")
@@ -107,16 +107,13 @@ def võrdset_palgad(i:list,p:list)->any:
     param int maxpalk: Sisestab väiksem palk
     param list nimed: Sisestab väiksem palk saatjad
     """
-    korduvadpalgad={}
-    for t in range(len(p)):
-        if p[t] not in korduvadpalgad:
-            korduvadpalgad[p[t]] = [i[t]]
-        else:
-            korduvadpalgad[p[t]].append(i[t])
-    print(korduvadpalgad)
-    uhis_list = [(p, i) for p, i in korduvadpalgad.items() if len(i) > 1]
-    return uhis_list    
-
+    palgad={}
+    for n in range(len(p)):
+        if p.count(p[n])>1:
+            palgad[p[n]] = [i[n]]
+            for d in range(p.count(p[n])-1):
+                palgad[p[n]].append(i[p.index(p[n],d)])
+    return palgad
 
 
     
