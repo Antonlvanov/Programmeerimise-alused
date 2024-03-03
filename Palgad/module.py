@@ -100,12 +100,11 @@ def sorteeritud_palgad(i:list,p:list)->any:
     except: print("Vale sisend")
 #6
 def võrdset_palgad(i:list,p:list)->any:
-    """Funktsioon leiab kõige väiksem palk 
+    """Funktsioon leiab võrdset palgad 
     param list i: Inimeste järjend
     param list p: Palgate järjend
     rtype: list, list
-    param int maxpalk: Sisestab väiksem palk
-    param list nimed: Sisestab väiksem palk saatjad
+    param dict palgad: Sisestab kõik andmed
     """
     palgad={}
     for n in range(len(p)):

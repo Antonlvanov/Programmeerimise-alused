@@ -2,7 +2,7 @@
 palgad=[1200,2500,750,395,1200,395]
 inimesed=["A","G","C","D","E","F"]
 while True:
-    print("\n0-Naita andmed veerudes\n1-andemete lisamine\n2-andmete kustutamine\n3-kõige suurim palk\n4-kõige väiksem palk\n5-sorteeritud palgad\n6-võrdsed palgad\n") 
+    print("\n0-Naita andmed veerudes\n1-andemete lisamine\n2-andmete kustutamine\n3-kõige suurim palk\n4-kõige väiksem palk\n5-sorteeritud palgad\n6-võrdset palgad\n") 
     valik=int(input())
     if 0<=valik<20:
         if valik==1:
@@ -22,6 +22,7 @@ while True:
             sorteeritud_palgad(inimesed, palgad)
         elif valik==6:
             print(võrdset_palgad(inimesed, palgad))
+            
     else: 
         print("Vale sisend")
         continue   
