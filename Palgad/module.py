@@ -107,7 +107,15 @@ def võrdset_palgad(i:list,p:list)->any:
     param int maxpalk: Sisestab väiksem palk
     param list nimed: Sisestab väiksem palk saatjad
     """
-    
+    korduvadpalgad={}
+    for t in range(len(p)):
+        if p[t] not in korduvadpalgad:
+            korduvadpalgad[p[t]] = [i[t]]
+        else:
+            korduvadpalgad[p[t]].append(i[t])
+    print(korduvadpalgad)
+    uhis_list = [(p, i) for p, i in korduvadpalgad.items() if len(i) > 1]
+    return uhis_list    
 
 
 
