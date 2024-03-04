@@ -79,25 +79,26 @@ def sorteeritud_palgad(i:list,p:list)->any:
     rtype: list, list
     """
     try:
-        for n in range(0,len(i)):
-            for j in range(n,len(i)):
-                if p[n]<p[j]:
-                    p[j],p[n]=p[n],p[j]
-                    i[j],i[n]=i[n],i[j]
         s=int(input("Järjestada palgad kahanevas (1) või kasvavas (2) järjekorras?: "))
-        if s==1:
-            print("Palgad kahanevas järjekorras:")
-            for j in range(len(i)):
-                print(i[j],"-",p[j])
-        if s==2:
-            print("Palgad kasvavas järjekorras:")
-            i.reverse()
-            p.reverse()
-            for j in range(len(i)):
-                print(i[j],"-",p[j])
-        if 1>s or s>2:
-            print("Vale sisend")
     except: print("Vale sisend")
+    for n in range(0,len(i)):
+        for j in range(n,len(i)):
+            if p[n]<p[j]:
+                p[j],p[n]=p[n],p[j]
+                i[j],i[n]=i[n],i[j]
+        
+    if s==1:
+        print("Palgad kahanevas järjekorras:")
+        for j in range(len(i)):
+            print(i[j],"-",p[j])
+    if s==2:
+        print("Palgad kasvavas järjekorras:")
+        i.reverse()
+        p.reverse()
+        for j in range(len(i)):
+            print(i[j],"-",p[j])
+    if 1>s or s>2:
+        print("Vale sisend")
 #6
 def võrdset_palgad(i:list,p:list)->any:
     """Funktsioon leiab võrdset palgad 
@@ -140,4 +141,21 @@ def palga_vordlus(i:list,p:list)->any:
             vaik.append((i[k], p[k]))
     return suur,vaik,summa
 
-    
+#9 
+def top_vaeseimad_rikkamad(i:list,p:list)->any:
+    try: amount=int(input("Kui palju: "))
+    except: print("Vale sisend")
+    ks=[]
+    for k in range(len(p)):
+        klist=[]
+        klist.append((i[k]))
+        klist.append((p[k]))
+        ks.append(klist)
+    for n in range(len(p)):
+        for k in range(n,len(p)):
+            if ks[k][1]<ks[n][1]:
+                ks[k],ks[n]=ks[n],ks[k]
+    low=ks[:amount]
+    high=ks[-amount:]
+    high.reverse()
+    return low,high

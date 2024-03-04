@@ -25,7 +25,7 @@ while True:
             sorteeritud_palgad(inimesed, palgad)
         elif valik==6:
             plg=võrdset_palgad(inimesed, palgad)
-            for key, i in plg.items():
+            for key,i in plg.items():
                 plgv= ", ".join(i)
                 print(f"Palk: {key} Palga saatjad: {plgv}")
         elif valik==7:
@@ -34,6 +34,9 @@ while True:
             vaik,suur,summa=palga_vordlus(inimesed,palgad)
             print(f"Väiksem: {vaik}")
             print(f"Suurem: {suur}")
+        elif valik==9:
+            low,high=top_vaeseimad_rikkamad(inimesed, palgad)
+            print(f"Vaeseimad inimesed {low}\nRikkamad inimesed: {high}")
     else: 
         print("Vale number")
         continue   
