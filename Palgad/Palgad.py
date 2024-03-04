@@ -1,9 +1,12 @@
 ﻿from module import *
-palgad=[1200,2500,750,395,1200,395]
-inimesed=["A","G","C","D","E","F"]
+palgad=[1200,2500,750,395,1200,395,600]
+inimesed=["A","G","C","D","E","F","F"]
 while True:
-    print("\n0-Naita andmed veerudes\n1-andemete lisamine\n2-andmete kustutamine\n3-kõige suurim palk\n4-kõige väiksem palk\n5-sorteeritud palgad\n6-võrdset palgad\n") 
-    valik=int(input())
+    print("\n0-Naita andmed veerudes\n1-andemete lisamine\n2-andmete kustutamine\n3-kõige suurim palk\n4-kõige väiksem palk\n5-sorteeritud palgad\n6-võrdset palgad\n7-palgaotsing nime järgi\n") 
+    try: valik=int(input())
+    except: 
+        print("Vale sisend")
+        continue
     if 0<=valik<20:
         if valik==1:
             inimesed,palgad=inimeste_ja_palkade_lisamine(inimesed,palgad,int(input("Mitu inimest lisame? ")))
@@ -25,7 +28,12 @@ while True:
             for key, i in plg.items():
                 plgv= ", ".join(i)
                 print(f"Palk: {key} Palga saatjad: {plgv}")
-            
+        elif valik==7:
+            print(palgaotsing_nime_jargi(inimesed,palgad))
+        elif valik==8:
+            vaik,suur,summa=palga_vordlus(inimesed,palgad)
+            print(f"Väiksem: {vaik}")
+            print(f"Suurem: {suur}")
     else: 
-        print("Vale sisend")
+        print("Vale number")
         continue   

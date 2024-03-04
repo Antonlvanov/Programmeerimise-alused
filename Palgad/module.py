@@ -114,5 +114,42 @@ def võrdset_palgad(i:list,p:list)->any:
                 palgad[p[n]].append(i[p.index(p[n],d)])
     return palgad
 
+#7
+def palgaotsing_nime_jargi(i:list,p:list)->any:
+    """Palgaotsing nime järgi
+    
+    """
+    try: nimi=str(input("Sisesta otsitav nimi: "))
+    except:print("Vale sisend")
+    leitud=[]
+    for k in range(len(i)):
+        if i[k] == nimi:
+            leitud.append((i[k], p[k]))
+    return leitud
 
+#8 
+def palga_vordlus(i:list,p:list)->any:
+    try: summa=int(input("Sisesta summa: "))
+    except: print("Vale sisend")
+    suur=[]
+    vaik=[]
+    for k in range(len(p)):
+        if p[k] > summa:
+            suur.append((i[k], p[k])) 
+        if p[k] < summa:
+            vaik.append((i[k], p[k]))
+    return suur,vaik,summa
+
+#9 
+def top_vaeseimad_rikkamad(inimesed, palgad):
+    sorteeritud = sorted(zip(inimesed, palgad), key=lambda x: x[1])
+    vaeseimad = sorteeritud[:3]
+    rikkamad = sorteeritud[-3:]
+    return vaeseimad, rikkamad
+
+#10
+def keskmine_palk(inimesed, palgad):
+    keskmine = sum(palgad) / len(palgad)
+    keskmine_inimene = [inimesed[i] for i in range(len(inimesed)) if palgad[i] == keskmine]
+    return keskmine, keskmine_inimene
     
