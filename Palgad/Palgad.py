@@ -9,7 +9,7 @@ while True:
         continue
     if 0<=valik<20:
         if valik==1:
-            inimesed,palgad=inimeste_ja_palkade_lisamine(inimesed,palgad,int(input("Mitu inimest lisame? ")))
+            inimesed,palgad=inimeste_lisamine(inimesed,palgad,int(input("Mitu inimest lisame? ")))
             andmed_veerudes(inimesed,palgad)
         elif valik==0:
             andmed_veerudes(inimesed,palgad)
@@ -36,7 +36,21 @@ while True:
             print(f"Suurem: {suur}")
         elif valik==9:
             low,high=top_vaeseimad_rikkamad(inimesed, palgad)
-            print(f"Vaeseimad inimesed {low}\nRikkamad inimesed: {high}")
+            # print(f"Vaeseimad inimesed: {low}\nRikkamad inimesed: {high}")
+            print("Vaeseimad inimesed:")
+            for i in range(len(low)):
+                print(f"{low[i][0]}: {low[i][1]}")
+            print("Rikkamad inimesed:")
+            for i in range(len(high)):
+                print(f"{high[i][0]}: {high[i][1]}")
+            # for key in range(len(low)):
+            #     vae=", ".join(low[i])
+            #     print(f"Vaeseimad inimesed: {key} Palga saatjad: {vae}")
+        elif valik==10:
+            keskinim,palk=keskmine_palk(inimesed,palgad)
+            print(f"Keskmine palk: {palk}")
+            print(f"Saatja(d): {', '.join(map(str, keskinim))}")
+        #elif valik==11:
     else: 
         print("Vale number")
         continue   

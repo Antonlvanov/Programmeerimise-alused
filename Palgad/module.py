@@ -1,7 +1,7 @@
 ﻿from math import e
 
 #1
-def inimeste_ja_palkade_lisamine(i:list,p:list,n:int)->any:
+def inimeste_lisamine(i:list,p:list,n:int)->any:
     """Funktsioon tagastab uuendatud loendid, kus lisatud inimesi ja palka
     param list i: Inimeste järjend
     param list p: Palgate järjend
@@ -157,3 +157,17 @@ def top_vaeseimad_rikkamad(i:list,p:list)->any:
     high=ks[-amount:]
     high.reverse()
     return low,high
+
+#10
+def keskmine_palk(inimesed:list, palgad:list)->any:
+    kesk=sum(palgad) / len(palgad)
+    keskmine_inimene = []
+    vaikseim_erinevus = float(1000)
+    palk=[]
+    for i in range(len(inimesed)):
+        erinevus = abs(palgad[i] - kesk)
+        if erinevus <= vaikseim_erinevus:
+            vaikseim_erinevus = erinevus
+            keskmine_inimene.append(inimesed[i])
+            palk=palgad[i]
+    return keskmine_inimene, palk
