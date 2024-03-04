@@ -147,9 +147,7 @@ def top_vaeseimad_rikkamad(i:list,p:list)->any:
     except: print("Vale sisend")
     ks=[]
     for k in range(len(p)):
-        klist=[]
-        klist.append((i[k]))
-        klist.append((p[k]))
+        klist=[i[k],p[k]]
         ks.append(klist)
     for n in range(len(p)):
         for k in range(n,len(p)):
