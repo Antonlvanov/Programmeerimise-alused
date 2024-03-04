@@ -21,7 +21,10 @@ while True:
         elif valik==5:
             sorteeritud_palgad(inimesed, palgad)
         elif valik==6:
-            print(võrdset_palgad(inimesed, palgad))
+            plg=võrdset_palgad(inimesed, palgad)
+            for key, i in plg.items():
+                plgv= ", ".join(i)
+                print(f"Palk: {key} Palga saatjad: {plgv}")
             
     else: 
         print("Vale sisend")
