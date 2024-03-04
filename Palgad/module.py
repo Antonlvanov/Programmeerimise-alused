@@ -140,16 +140,4 @@ def palga_vordlus(i:list,p:list)->any:
             vaik.append((i[k], p[k]))
     return suur,vaik,summa
 
-#9 
-def top_vaeseimad_rikkamad(inimesed, palgad):
-    sorteeritud = sorted(zip(inimesed, palgad), key=lambda x: x[1])
-    vaeseimad = sorteeritud[:3]
-    rikkamad = sorteeritud[-3:]
-    return vaeseimad, rikkamad
-
-#10
-def keskmine_palk(inimesed, palgad):
-    keskmine = sum(palgad) / len(palgad)
-    keskmine_inimene = [inimesed[i] for i in range(len(inimesed)) if palgad[i] == keskmine]
-    return keskmine, keskmine_inimene
     
