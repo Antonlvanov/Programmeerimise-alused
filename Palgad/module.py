@@ -1,5 +1,14 @@
 ﻿from math import e
 
+#0    
+def andmed_veerudes(i:list,p:list):
+    """Funktsioon kuvab ekraanile kahe järjendite andmed veerudes
+    param list i: Inimeste järjend
+    param list p: Palgate järjend
+    """
+    for j in range(len(i)):
+        print(f"#{j+1} {i[j]} - {p[j]}") 
+
 #1
 def inimeste_lisamine(i:list,p:list,n:int)->any:
     """Funktsioon tagastab uuendatud loendid, kus lisatud inimesi ja palka
@@ -17,14 +26,7 @@ def inimeste_lisamine(i:list,p:list,n:int)->any:
                 p.append(palk)
         return i,p
     except: "Vale sisend"
-#0    
-def andmed_veerudes(i:list,p:list):
-    """Funktsioon kuvab ekraanile kahe järjendite andmed veerudes
-    param list i: Inimeste järjend
-    param list p: Palgate järjend
-    """
-    for j in range(len(i)):
-        print(i[j],"-",p[j]) 
+
 #2
 def andmete_eemaldamine_nimi_jargi(i:list,p:list)->any:
     """Funktsioon kustutab andmeid ja tagastab listid.
@@ -171,3 +173,45 @@ def keskmine_palk(inimesed:list, palgad:list)->any:
             keskmine_inimene.append(inimesed[i])
             palk=palgad[i]
     return keskmine_inimene, palk
+
+#11
+def tulumaks(inimesed:list, palgad:list, eilahe=654, tulumaks=0.20)->any:
+    for i in range(len(palgad)):
+        netopalk = palgad[i]-((palgad[i] - eilahe)*tulumaks)
+        palgad[i] = netopalk
+    andmed_veerudes(inimesed,palgad)
+
+#12
+def sort_by_name(inimesed:list, palgad:list)->any:
+    spisok=[]
+    for i in range(len(inimesed)):
+        spisok.append((inimesed[i], palgad[i]))
+        spisok.sort()
+    for i in range(len(inimesed)):
+        inimesed[i]=spisok[i][0]
+        palgad[i]=spisok[i][1]
+    andmed_veerudes(inimesed,palgad)
+    
+#13
+def remove_below_average(inimesed:list, palgad:list)->any:
+    keskpalk = keskmine_palk(inimesed,palgad)[1]
+    indlist=[]
+    for i in range(len(inimesed)):
+        if palgad[i] < keskpalk:
+            indlist.append(i)
+    indlist.reverse()
+    for i in range(len(indlist)):
+        del palgad[indlist[i]]
+        del inimesed[indlist[i]]
+    andmed_veerudes(inimesed,palgad)
+
+#14
+import re
+def edit_lists(inimesed:list, palgad:list)->any:
+    for i in range(len(inimesed)):
+        inimesed[i]=str(inimesed[i]).capitalize()
+        int(palgad[i])
+    print("Palgad tüüp:",re.findall(r"'(.*?)'", str(type(palgad[1])))[0])
+    andmed_veerudes(inimesed,palgad)
+
+#15
