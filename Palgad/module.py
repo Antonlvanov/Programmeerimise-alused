@@ -1,4 +1,4 @@
-﻿from math import e
+﻿
 
 #0    
 def andmed_veerudes(i:list,p:list):
@@ -10,22 +10,21 @@ def andmed_veerudes(i:list,p:list):
         print(f"#{j+1} {i[j]} - {p[j]}") 
 
 #1
-def inimeste_lisamine(i:list,p:list,n:int)->any:
+def inimeste_lisamine(i:list,p:list)->any:
     """Funktsioon tagastab uuendatud loendid, kus lisatud inimesi ja palka
     param list i: Inimeste järjend
     param list p: Palgate järjend
     param int n: Inimeste arv
     rtype: list, list
     """
-    try:
-        if n>0:
-            for j in range(n):
-                nimi=str(input(f"Nimi {j+1}: ")).capitalize() 
-                palk=int(input(f"Palk {j+1}: ")) 
-                i.append(nimi) 
-                p.append(palk)
+    n = int(input("Mitu inimest lisame? "))
+    if n>0:
+        for j in range(n):
+            nimi=str(input(f"Nimi {j+1}: ")).capitalize() 
+            palk=int(input(f"Palk {j+1}: ")) 
+        i.append(nimi) 
+        p.append(palk)
         return i,p
-    except: "Vale sisend"
 
 #2
 def andmete_eemaldamine_nimi_jargi(i:list,p:list)->any:
@@ -34,7 +33,8 @@ def andmete_eemaldamine_nimi_jargi(i:list,p:list)->any:
     param list p: Palgate järjend
     rtype: list, list
     """
-    nimi=str(input("Keda kustutada ära? (nimi): ")).capitalize() 
+    try:nimi=str(input("Keda kustutada ära? (nimi): ")).capitalize() 
+    except: "Vale sisend"
     if nimi in i:
         p.pop(i.index(nimi))
         i.remove(nimi)
@@ -55,7 +55,7 @@ def kellel_on_suurim_palk(i:list,p:list)->any:
     for k, x in enumerate(p):
         if x == maxpalk:
             nimed.append(i[k])
-    return maxpalk,nimed
+    print("Suurem palk on",maxpalk,"\nSaatja(d):", ", ".join(nimed))
     # for j in range(p.count(max(p))):
     #     nimed.append(i[p.index(max(p),p.index(max(p))+j)])
 #4
@@ -72,7 +72,8 @@ def kellel_on_vaiksem_palk(i:list,p:list)->any:
     for k, x in enumerate(p):
         if x == minpalk:
             nimed.append(i[k])
-    return minpalk,nimed
+    print("Väiksem palk on",minpalk,"\nSaatja(d):", ", ".join(nimed))
+
 #5
 def sorteeritud_palgad(i:list,p:list)->any:
     """Funktsioon sorteerib palgad
@@ -115,7 +116,9 @@ def võrdset_palgad(i:list,p:list)->any:
             palgad[p[n]] = [i[n]]
             for d in range(p.count(p[n])-1):
                 palgad[p[n]].append(i[p.index(p[n],d)])
-    return palgad
+    for key,i in palgad.items():
+        plgv= ", ".join(i)
+        print(f"Palk: {key} Palga saatjad: {plgv}")
 
 #7
 def palgaotsing_nime_jargi(i:list,p:list)->any:
@@ -124,11 +127,15 @@ def palgaotsing_nime_jargi(i:list,p:list)->any:
     """
     try: nimi=str(input("Sisesta otsitav nimi: "))
     except:print("Vale sisend")
-    leitud=[]
-    for k in range(len(i)):
-        if i[k] == nimi:
-            leitud.append((i[k], p[k]))
-    return leitud
+    if nimi in i:
+        leitud=[]
+        for k in range(len(i)):
+            if i[k] == nimi:
+                leitud.append(i[k])
+                leitud.append(p[k])
+        for i in range(0,len(leitud),2):
+            print(f"{leitud[i]}: {leitud[i+1]}")
+    else: print("Nimi ei leitud")
 
 #8 
 def palga_vordlus(i:list,p:list)->any:
@@ -138,10 +145,17 @@ def palga_vordlus(i:list,p:list)->any:
     vaik=[]
     for k in range(len(p)):
         if p[k] > summa:
-            suur.append((i[k], p[k])) 
+            suur.append(i[k])
+            suur.append(p[k])
         if p[k] < summa:
-            vaik.append((i[k], p[k]))
-    return suur,vaik,summa
+            vaik.append(i[k])
+            vaik.append(p[k])
+    print("Saavad rohkem:")
+    for i in range(0,len(suur),2):
+        print(f"{suur[i]}: {suur[i+1]}")
+    print("Saavad vähem:")
+    for i in range(0,len(vaik),2):
+        print(f"{vaik[i]}: {vaik[i+1]}")
 
 #9 
 def top_vaeseimad_rikkamad(i:list,p:list)->any:
@@ -158,7 +172,12 @@ def top_vaeseimad_rikkamad(i:list,p:list)->any:
     low=ks[:amount]
     high=ks[-amount:]
     high.reverse()
-    return low,high
+    print("Vaeseimad inimesed:")
+    for i in range(len(low)):
+        print(f"{low[i][0]}: {low[i][1]}")
+    print("Rikkamad inimesed:")
+    for i in range(len(high)):
+        print(f"{high[i][0]}: {high[i][1]}")
 
 #10
 def keskmine_palk(inimesed:list, palgad:list)->any:
@@ -172,14 +191,17 @@ def keskmine_palk(inimesed:list, palgad:list)->any:
             vaikseim_erinevus = erinevus
             keskmine_inimene.append(inimesed[i])
             palk=palgad[i]
-    return keskmine_inimene, palk
+    print(f"Keskmine palk: {palk}")
+    print(f"Saatja(d): {', '.join(map(str, keskmine_inimene))}")
 
 #11
 def tulumaks(inimesed:list, palgad:list, eilahe=654, tulumaks=0.20)->any:
+    pal=palgad.copy()
     for i in range(len(palgad)):
-        netopalk = palgad[i]-((palgad[i] - eilahe)*tulumaks)
-        palgad[i] = netopalk
-    andmed_veerudes(inimesed,palgad)
+        netopalk = pal[i]-((pal[i] - eilahe)*tulumaks)
+        pal[i] = int(netopalk)
+    for j in range(len(pal)):
+        print(f"#{j+1} {inimesed[j]} - {pal[j]}") 
 
 #12
 def sort_by_name(inimesed:list, palgad:list)->any:
@@ -207,7 +229,7 @@ def remove_below_average(inimesed:list, palgad:list)->any:
 
 #14
 import re
-def edit_lists(inimesed:list, palgad:list)->any:
+def muuda_listid(inimesed:list, palgad:list)->any:
     for i in range(len(inimesed)):
         inimesed[i]=str(inimesed[i]).capitalize()
         int(palgad[i])
@@ -215,3 +237,53 @@ def edit_lists(inimesed:list, palgad:list)->any:
     andmed_veerudes(inimesed,palgad)
 
 #15
+def tosta_palka(inimesed:list, palgad:list)->any:
+    pal=[]
+    pal=palgad.copy()
+    aastat=int(input("Mitu aastat loenda? "))
+    for d in range(aastat):
+        for i in range(len(palgad)):
+            pal[i] *= 1.05
+            pal[i] = int(pal[i])
+    print("Uuendatud list:")
+    for j in range(len(pal)):
+        print(f"#{j+1} {inimesed[j]} - {pal[j]}") 
+    
+
+#16
+def nimetada_iga_kolme(inimesed:list, palgad:list)->any:
+    """Funktsioon umber nimetab iga kolme inimeste ja tagastab listid.
+    param list i: Inimeste järjend
+    param list p: Palgate järjend
+    rtype: list, list
+    """
+    for i in range(2, len(inimesed), 3):
+        if i<len(inimesed):
+            try:nimi=str(input(f"Sisesta uus nimi? #{i}: ")).capitalize()
+            except: print("Vale sisend")
+            inimesed[i] = nimi
+        else: continue
+    print("Uuendatud list:")
+    andmed_veerudes(inimesed,palgad)
+
+#17
+def muuta_andmeid(inimesed:list, palgad:list)->any:
+    nimi=str(input("Kelle andmed soovite muutuda?: ")).capitalize()
+    if nimi in inimesed:
+        valik=input("Mida soovite redigeerida? (Nimi - 1 / Palk - 2): ")
+        if valik == "1":
+            uusnimi=str(input("Uus nimi: ")).capitalize()
+            if inimesed.count(uusnimi)==0:
+                inimesed[inimesed.index(nimi)]=uusnimi
+                print("Uuendatud list:")
+                andmed_veerudes(inimesed,palgad)
+                return 0
+            else:
+                print("See nimi on juba hõivatud.")
+        if valik == "2":
+            palgad[inimesed.index(nimi)]=int(input("Sisesta uus palk: "))
+            print("Uuendatud list:")
+            andmed_veerudes(inimesed,palgad)
+        else: 
+            print("Vale valik")
+    else: print("Nimi ei leidnud")
