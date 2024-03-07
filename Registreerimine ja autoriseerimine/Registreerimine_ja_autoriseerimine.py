@@ -1,13 +1,14 @@
 ﻿from module1 import *
 
-kasutajad=["A","G","C","D","E"]
+kasutajad=["Anna","Grisha","Sasha","Daniil","Eren"]
 paroolid=[]
 for i in range(len(kasutajad)):
     k=''
     paroolid.append(salasona_genereerimine(k))
 while True:
-    print("\n1 Registreetimine\n2 Autoriseerimine\n3 Parooli taastamine\n4 Kinnita")
+    print("\n1 Registreetimine \n2 Autoriseerimine \n3 Parooli taastamine\n4 Kinnita")
     print()
+    v=0
     try:
         v=int(input())
     except: 
@@ -20,15 +21,17 @@ while True:
         elif v==4:
             exit(0)
         elif v==2:
-            while autoriseerimine(kasutajad,paroolid):
-                print("\n1 Unustanud parooli taastamine\n2 Nimi või parooli muutumine")
+            re,kasutajanimi=autoriseerimine(kasutajad,paroolid)
+            if re==True:
+                print("\n1 Unustanud parooli taastamine\n2 Näita kõik kasutajad andmeid")
                 c=int(input())
                 if c==1:
-                    unustanud_parooli_taastamine(kasutajad,paroolid)
+                    ome_nimi_voi_parooli_muutmine(kasutajad,paroolid,kasutajanimi)
                     continue
                 if c==2:
-                    nime_voi_parooli_muutmine(kasutajad,paroolid)
+                    näita_koik_kasutajad_andmeid(kasutajad,paroolid)
                     continue
+            else: continue
     else: 
         print("Vale number")
         continue
