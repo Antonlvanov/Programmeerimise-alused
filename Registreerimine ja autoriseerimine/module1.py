@@ -1,9 +1,9 @@
-﻿import string
+import string
 import random
 import smtplib,ssl
 from email.message import EmailMessage
 
-def send_mail():
+def send_mail(kasutajad:list, paroolid:list, )->any:
     smtp_server="smtp.gmail.com"
     port = 587
     sender_mail="anton9032@gmail.com"
@@ -29,6 +29,7 @@ def send_mail():
     finally:
         server.quit()
         print("S")
+    
 
 def salasona_genereerimine(k:str):
     for i in range(12):
@@ -73,10 +74,24 @@ def check_name(kasutajad:list,name:str)->any:
         print("Nimi peab sisaldama 4-16 tähte")
         return False
 
-def registreerimine(kasutajad:list, paroolid:list)->any:
+def check_mail(email:str)->any:
+    if '@' in email and "." in email:
+        return True
+    else:
+        print("Vale posti adress")
+        return False
+
+def registreerimine(kasutajad:list, paroolid:list, emailid:list)->any:
     nimi=str(input("Sisesta soovitud nimi: "))
     if check_name(kasutajad,nimi):
         kasutajad.append(nimi)
+        mail=str(input("Sisesta postiadress: "))
+        while True:
+            if check_mail(mail):
+                emailid.append(mail)
+                break
+            else:
+                continue
         val=int(input("Valige kas te soovite automaatne parooli genereerimine (1) või luua parooli ise (2): "))
         parool=""
         if val==1:
@@ -85,15 +100,13 @@ def registreerimine(kasutajad:list, paroolid:list)->any:
             print(f"{nimi}! Genereeritud salasõna on {parool}")
             print("Konto edukalt registreeritud!")
             pass
-        while True:
-            if val==2:
-                pw=str(input("\nSisesta soovitud salasõna: "))
-                if check_password(pw):
-                    paroolid.append(pw)
-                    print("Konto edukalt registreeritud!")
-                    break
-                else:
-                    pass
+        if val==2:
+            pw=str(input("\nSisesta soovitud salasõna: "))
+            if check_password(pw):
+                paroolid.append(pw)
+                print("Konto edukalt registreeritud!")
+            else:
+                pass
     else: pass
 
 def autoriseerimine(kasutajad:list, paroolid:list)->any:
