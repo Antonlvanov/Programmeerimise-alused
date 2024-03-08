@@ -1,5 +1,34 @@
 ﻿import string
 import random
+import smtplib,ssl
+from email.message import EmailMessage
+
+def send_mail():
+    smtp_server="smtp.gmail.com"
+    port = 587
+    sender_mail="anton9032@gmail.com"
+    #to_mail="marina.oleinik@ttkk.com"
+    password="moch cerq cnsz rrhd"
+    context=ssl.create_default_context()
+    #msg
+    msg = EmailMessage()
+    msg.set_content("Tere Tulemast!")
+    msg['Subject']="Kirja teema"
+    msg['From']="anton9032@gmail.com"
+    msg['To']="anton9032@gmail.com"
+    try:
+        server = smtplib.SMTP(smtp_server, port)
+        server.ehlo() #can be omitted
+        server.starttls(context=context)
+        server.ehlo()
+        server.login(sender_mail, password)
+        #server.sendmail(sender_mail,to_mail,msg)
+        server.send_message(msg)
+    except Exception as e:
+        print(e)
+    finally:
+        server.quit()
+        print("S")
 
 def salasona_genereerimine(k:str):
     for i in range(12):
