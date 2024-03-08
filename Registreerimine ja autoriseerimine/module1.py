@@ -58,7 +58,7 @@ def check_password(password:str)->any:
             digit = True
         elif char in special:
             in_special = True
-    if (upper and lower and digit and special and pw_len):
+    if (upper and lower and digit and in_special and pw_len):
         return True 
     else:
         print("\nSalasõna peab sisaldama:\n8-16 tähte \nAlumise registri tähti \nÜlemise registri tähti \nNumbreid \nErimärke (!@#$%^&*)")
@@ -82,11 +82,13 @@ def check_mail(email:str)->any:
         return False
 
 def registreerimine(kasutajad:list, paroolid:list, emailid:list)->any:
-    nimi=str(input("Sisesta soovitud nimi: "))
-    if check_name(kasutajad,nimi):
-        kasutajad.append(nimi)
-        mail=str(input("Sisesta postiadress: "))
+    while True:
+        nimi=str(input("Sisesta soovitud nimi: "))
+        if check_name(kasutajad,nimi):
+            kasutajad.append(nimi)
+        else: continue
         while True:
+            mail=str(input("Sisesta postiadress: "))
             if check_mail(mail):
                 emailid.append(mail)
                 break
@@ -99,12 +101,13 @@ def registreerimine(kasutajad:list, paroolid:list, emailid:list)->any:
             paroolid.append(parool)
             print(f"{nimi}! Genereeritud salasõna on {parool}")
             print("Konto edukalt registreeritud!")
-            pass
+            break
         if val==2:
             pw=str(input("\nSisesta soovitud salasõna: "))
             if check_password(pw):
                 paroolid.append(pw)
                 print("Konto edukalt registreeritud!")
+                break
             else:
                 pass
     else: pass
