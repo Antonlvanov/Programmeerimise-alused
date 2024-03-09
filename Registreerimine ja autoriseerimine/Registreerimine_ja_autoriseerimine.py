@@ -11,6 +11,9 @@ for i in range(len(kasutajad)):
     emailid.append(str(kasutajad[i])+"@tthk.ee")
 
 while True:
+    print(kasutajad)
+    print(emailid)
+    print(paroolid)
     print("\n1 Registreetimine \n2 Autoriseerimine \n3 Parooli taastamine\n4 Kinnita")
     print()
     v=0
