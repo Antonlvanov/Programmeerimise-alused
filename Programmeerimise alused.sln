@@ -23,6 +23,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "UserFunkts", "UserFunkts\Us
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Palgad", "Palgad\Palgad.pyproj", "{2C8DEF4B-0E85-4652-8EA8-EAAD10E04F7F}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Registreerimine ja autoriseerimine", "Registreerimine ja autoriseerimine\Registreerimine ja autoriseerimine.pyproj", "{DEF65665-83C5-4BE0-A0E9-736E1469528B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,8 @@ Global
 		{2A9AE318-ED45-4AD5-823D-93FFF491C484}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C8DEF4B-0E85-4652-8EA8-EAAD10E04F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C8DEF4B-0E85-4652-8EA8-EAAD10E04F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF65665-83C5-4BE0-A0E9-736E1469528B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF65665-83C5-4BE0-A0E9-736E1469528B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
