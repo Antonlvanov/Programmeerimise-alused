@@ -55,24 +55,6 @@ def update_user_data(kasutaja, new_data, change, new_username=None):
     except Exception as e:
         print(f"Произошла ошибка: {e}")
         return False
-    
-# def update_user_data(kasutaja, new_data, change, new_username=None):
-#     try:
-#         filename = 'kasutajate_andmed.csv'
-#         file = pd.read_csv(filename)
-#         if kasutaja not in file['Kasutaja'].values:
-#             print(f"Пользователь {kasutaja} не найден.")
-#             return
-#         if new_username:
-#             file.loc[file['Kasutaja'] == kasutaja, 'Kasutaja'] = new_username
-#         if change in file.columns and change != 'Kasutaja':  # Не обновляем поле 'Kasutaja'
-#             file.loc[file['Kasutaja'] == kasutaja, change] = new_data
-#         else:
-#             print(f"Поле {change} не найдено.")
-#             return False
-#         file.to_csv(filename, index=False)
-#         return True
-#     except: return False
 
 def write_data_from_list(kasutajad:list, emailid:list, paroolid:list) -> any:
     filename = 'kasutajate_andmed.csv'
