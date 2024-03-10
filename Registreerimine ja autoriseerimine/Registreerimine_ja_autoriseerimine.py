@@ -24,7 +24,7 @@ while True:
         elif v==2:
             kasutaja=autoriseerimine()
             if kasutaja!=False:
-                print("\n1 Unustanud parooli taastamine\n2 Näita kõik kasutajad andmeid")
+                print("\n1 Muutuda oma andmed\n2 Näita kõik kasutajad andmeid")
                 c=int(input())
                 if c==1:
                     oma_andme_muutmine(kasutaja)

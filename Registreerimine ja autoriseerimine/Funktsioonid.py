@@ -192,7 +192,3 @@ def oma_andme_muutmine(kasutaja:str)->any:
             break
         else:
             continue
-        
-def näita_koik_kasutajate_andmed()->any:
-    print(pd.read_csv('kasutajate_andmed.csv'))
-        

@@ -2,18 +2,17 @@
 from os import system
 import pandas as pd
 import os
+        
+def näita_koik_kasutajate_andmed()->any:
+    print(pd.read_csv('kasutajate_andmed.csv'))
 
-def template(kasutaja,email,parool):
+def user_to_file_by_template(kasutaja, email, parool):
+    filename = 'kasutajate_andmed.csv'
     data_template = pd.DataFrame({
         'Kasutaja': [kasutaja],
         'Email': [email],
         'Parool': [parool]
     })
-    return data_template
-    
-def user_to_file_by_template(kasutaja, email, parool):
-    filename = 'kasutajate_andmed.csv'
-    data_template = template(kasutaja, email, parool)
     if os.path.exists(filename):
         data_template.to_csv(filename, mode='a', header=False, index=False)
     else:
