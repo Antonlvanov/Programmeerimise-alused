@@ -1,43 +1,36 @@
-﻿from module1 import *
+﻿from Funktsioonid import *
 from Failid import *
 
 kasutajad=["Anna","Grisha","Sasha","Daniil","Eren"]
 paroolid=[]
 emailid=[]
-template()
 for i in range(len(kasutajad)):
-    k=''
-    paroolid.append(salasona_genereerimine(k))
+    paroolid.append(salasona_genereerimine())
     emailid.append(str(kasutajad[i])+"@tthk.ee")
-
+write_data_from_list(kasutajad,emailid,paroolid)
 while True:
-    print(kasutajad)
-    print(emailid)
-    print(paroolid)
-    print("\n1 Registreetimine \n2 Autoriseerimine \n3 Parooli taastamine\n4 Kinnita")
-    print()
     v=0
     try:
-        v=int(input())
+        v=int(input("\n1 Registreetimine \n2 Autoriseerimine \n3 Parooli taastamine\n4 Kinnita\n"))
     except: 
-        print("Vale andmed")
-    if 0<=v<7:
+        print("Vale sisend")
+    if 0<v<7:
         if v==1:
-            registreerimine(kasutajad,paroolid,emailid)
+            registreerimine()
         elif v==3:
-            unustanud_parooli_taastamine(kasutajad,paroolid,emailid)
+            unustanud_parooli_taastamine()
         elif v==4:
             exit(0)
         elif v==2:
-            re,kasutajanimi=autoriseerimine(kasutajad,paroolid)
-            if re==True:
+            kasutaja=autoriseerimine()
+            if kasutaja!=False:
                 print("\n1 Unustanud parooli taastamine\n2 Näita kõik kasutajad andmeid")
                 c=int(input())
                 if c==1:
-                    oma_nimi_voi_parooli_muutmine(kasutajad,paroolid,kasutajanimi)
+                    oma_andme_muutmine(kasutaja)
                     continue
                 if c==2:
-                    näita_koik_kasutajad_andmeid(kasutajad,paroolid)
+                    näita_koik_kasutajate_andmed()
                     continue
             else: continue
     else: 

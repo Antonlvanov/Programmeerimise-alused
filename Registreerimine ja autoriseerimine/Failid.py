@@ -1,38 +1,91 @@
-﻿from module1 import *
+﻿from Funktsioonid import *
 from os import system
-from gtts import *
 import pandas as pd
+import os
 
-def template():
-    template_df = pd.DataFrame({
-        'Username': [],
-        'Email': [],
-        'Phone': [],
-        'Address': []
+def template(kasutaja,email,parool):
+    data_template = pd.DataFrame({
+        'Kasutaja': [kasutaja],
+        'Email': [email],
+        'Parool': [parool]
     })
-    template_df.to_csv('users_template.csv', index=False)
+    return data_template
     
-def loe_failist(kasutaja_info:str,kasutajad:list,paroolid:list,emailid:list)->any:
-    """Loeme failist ja salvestame järjendisse. Funktsioon tagastab järjend
-    :param str fail:
-    :rtype: list
-    """
-    try:
-        f=open(fail,'r',endcoding="utf-8") #tryw 
-        jarjend=[]
-        for rida in f:
-            jarjend.append(rida.strip())
-        f.close()
-        return jarjend
-    except Exception as e:
-        print(e)
+def user_to_file_by_template(kasutaja, email, parool):
+    filename = 'kasutajate_andmed.csv'
+    data_template = template(kasutaja, email, parool)
+    if os.path.exists(filename):
+        data_template.to_csv(filename, mode='a', header=False, index=False)
+    else:
+        data_template.to_csv(filename, index=False)
 
-def kirjuta_failisse(fail:str,kasutajad:list,paroolid:list,emailid:list):
-    """
-    """
-    for i in range(len(jarjend)):
-        jarjend.append(input(f"{i+1} element: "))
-    f=open(fail,'w',encoding="utf-8")
-    for el in jarjend:
-        f.write(el+"\n")
-    f.close()
+def find_user_data(data):
+    file=pd.read_csv('kasutajate_andmed.csv')
+    user_data=pd.DataFrame(columns=file.columns) #
+    for index, row in file.iterrows():
+        for c in file.columns:
+            if data in str(row[c]):
+                user_data = pd.concat([user_data, row.to_frame().T], ignore_index=True)
+                break
+    if user_data.empty:
+        print()
+    else:
+        return user_data.iloc[0]
+    
+def update_user_data(kasutaja, new_data, change, new_username=None):
+    try:
+        filename = 'kasutajate_andmed.csv'
+        file = pd.read_csv(filename)
+        
+        if kasutaja not in file['Kasutaja'].values:
+            print(f"Пользователь {kasutaja} не найден.")
+            return False
+        
+        if new_username is not None:
+            file.loc[file['Kasutaja'].str.strip() == kasutaja, 'Kasutaja'] = new_username
+        
+        if change in file.columns and change != 'Kasutaja':
+            file.loc[file['Kasutaja'].str.strip() == kasutaja, change] = new_data
+        else:
+            print(f"Поле {change} не найдено или не может быть обновлено.")
+            return False
+        
+        file.to_csv(filename, index=False)
+        return True
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+        return False
+    
+# def update_user_data(kasutaja, new_data, change, new_username=None):
+#     try:
+#         filename = 'kasutajate_andmed.csv'
+#         file = pd.read_csv(filename)
+#         if kasutaja not in file['Kasutaja'].values:
+#             print(f"Пользователь {kasutaja} не найден.")
+#             return
+#         if new_username:
+#             file.loc[file['Kasutaja'] == kasutaja, 'Kasutaja'] = new_username
+#         if change in file.columns and change != 'Kasutaja':  # Не обновляем поле 'Kasutaja'
+#             file.loc[file['Kasutaja'] == kasutaja, change] = new_data
+#         else:
+#             print(f"Поле {change} не найдено.")
+#             return False
+#         file.to_csv(filename, index=False)
+#         return True
+#     except: return False
+
+def write_data_from_list(kasutajad:list, emailid:list, paroolid:list) -> any:
+    filename = 'kasutajate_andmed.csv'
+    if os.path.exists(filename):
+        kasutajate_andmed = pd.read_csv(filename)
+        for i in range(len(kasutajad)):
+            if kasutajad[i] in kasutajate_andmed['Kasutaja'].values:
+                print(f"Kasutaja {kasutajad[i]} on juba olemas. Andmed pole lisatud")
+                continue
+            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
+        return True
+    else:
+        for i in range(len(kasutajad)):
+            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
+        return True
+
