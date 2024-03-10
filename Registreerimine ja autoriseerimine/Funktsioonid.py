@@ -1,4 +1,3 @@
-from distutils.spawn import find_executable
 from Failid import *
 import string
 import random
