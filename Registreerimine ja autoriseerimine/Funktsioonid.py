@@ -136,8 +136,8 @@ def send_mail(kasutaja:str, password:str, email:str)->any:
         server.ehlo()
         server.login(sender_mail, emailkeywords)
         server.send_message(msg)
-    except Exception as e:
-        print(e)
+    except:
+        print("Viga, email pole saadetud")
     finally:
         return True
         print("Email oli saadetud")
