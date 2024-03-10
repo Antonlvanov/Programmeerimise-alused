@@ -36,25 +36,18 @@ def update_user_data(kasutaja, new_data, change, new_username=None):
     try:
         filename = 'kasutajate_andmed.csv'
         file = pd.read_csv(filename)
-        
         if kasutaja not in file['Kasutaja'].values:
-            print(f"Пользователь {kasutaja} не найден.")
+            print(f"Kasutaja {kasutaja} ei leidnud.")
             return False
-        
         if new_username is not None:
             file.loc[file['Kasutaja'].str.strip() == kasutaja, 'Kasutaja'] = new_username
-        
         if change in file.columns and change != 'Kasutaja':
             file.loc[file['Kasutaja'].str.strip() == kasutaja, change] = new_data
         else:
-            print(f"Поле {change} не найдено или не может быть обновлено.")
             return False
-        
         file.to_csv(filename, index=False)
         return True
-    except Exception as e:
-        print(f"Произошла ошибка: {e}")
-        return False
+    except: return False
 
 def write_data_from_list(kasutajad:list, emailid:list, paroolid:list) -> any:
     filename = 'kasutajate_andmed.csv'
