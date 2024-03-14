@@ -110,7 +110,7 @@ def registreerimine()->any:
             while True:
                 pw=str(input("\nSisesta soovitud parooli: "))
                 if check_password(pw):
-                    user_to_file_by_template(username,email,password)
+                    user_to_file_by_template(username,email,pw)
                     print("Konto edukalt registreeritud!")
                     return True
                 if input("Proovi uuesti? (y/n):")=="y":
