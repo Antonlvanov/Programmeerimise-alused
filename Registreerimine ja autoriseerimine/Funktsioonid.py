@@ -1,10 +1,16 @@
-from Failid import *
-import string
+﻿import string
 import random
 import smtplib,ssl
 from email.message import EmailMessage
-    
-def salasona_genereerimine():
+from os import system
+import pandas as pd
+import os
+
+def salasona_genereerimine()->str:
+    """
+    Funktsioon genereerib juhuslik parool. Tagastab genereeritud parool
+    param pw: Sisestab genereeritud parool
+    """
     pw=''
     for i in range(12):
         t=random.choice(string.ascii_letters) 
@@ -15,6 +21,10 @@ def salasona_genereerimine():
     return pw
 
 def check_name(name)->any:
+    """
+    Funktsioon kontrollib kas nimi pikkus on vastuvõetav, tagastab True või False
+    param name: Sisestab nimi
+    """
     if (len(name))>=4 and (len(name))<=16:
         return True
     else:
@@ -29,6 +39,10 @@ def check_mail(email:str)->any:
         return False
 
 def check_password(password:str)->any:
+    """
+    Funktsioon kontrollib kas parool on sisestab erinevad sümbolid. Tagastab True või False
+    param password: Sisestab parool
+    """
     special = str("!@#$%^&*")
     upper=lower=digit=in_special=False
     pw_len=True
@@ -51,6 +65,18 @@ def check_password(password:str)->any:
         return False
 
 def registreerimine()->any:
+    """
+    Funktsioon teostab registreerimist ja lisab andmed failisse. 
+    Funktsioon kasutab funktsioon find_user_name et alla laadida andmed failist ja kontrollida et kasutaja nimi ei ole hõivatud.
+    Kasutab funktsioon email et kontrollida kas emaili vormingus on õige.
+    Kasutab funktsioon user_to_file_by_template et kirjutada andmed failis.
+    Kasutab funktsioon check_password et kontrolida kas parool vastab kõige nõuetele.
+
+    :param username: Sisestab nimi
+    :param find: Sisestab kasutaja andmed (DataFrame)
+    :param email: Sisestab kasutaja email.
+    :param password: Sisestab kasutaja parool
+    """
     while True:
         username=input("Sisesta soovitud nimi: ")
         if len(username)<4 or len(username)>16:
@@ -96,6 +122,16 @@ def registreerimine()->any:
             continue
 
 def autoriseerimine()->any:
+    """
+    Funktsioon tegistab autoriseerimine. Tagastab True või False et kontrollida kas autoriseerimine oli edukalt.
+    Funktsioon kasutab funktsioon find_user_name et alla laadida andmed failist ja kontrollida et kasutaja nimi ei ole hõivatud.
+    Kasutab funktsioon check_password et kontrolida kas parool vastab kõige nõuetele.
+
+    :param kasutajanimi: Sisestab soovitud kasutajanimi
+    :param find: Sisestab kasutaja andmed (DataFrame)
+    :param parool: Sisestab kasutaja parool.
+
+    """
     while True:
         kasutajanimi=input("Kasutaja nimi: ")
         find = find_user_data(kasutajanimi)
@@ -119,6 +155,9 @@ def autoriseerimine()->any:
         
 
 def send_mail(kasutaja:str, password:str, email:str)->any:
+    """
+    Funktsioon saadab kasutaja andmed ja saadab kasutaja parool emailile. Tagastab True või False et kontrollida kas email oli saadetud.
+    """
     smtp_server="smtp.gmail.com"
     port = 587
     emailkeywords="moch cerq cnsz rrhd"
@@ -139,11 +178,18 @@ def send_mail(kasutaja:str, password:str, email:str)->any:
     except:
         print("Viga, email pole saadetud")
     finally:
-        return True
         print("Email oli saadetud")
         server.quit()
+        return True
     
 def unustanud_parooli_taastamine()->any:
+    """
+    Funktsioon võimaldab taastada parooli kasutades kasutaja nime või parool. Tagastab True või False.
+    Funktsioon kasutab funktsioon find_user_name et alla laadida andmed failist ja kontrollida kas on olemas sisestatud andmed andmebaasis.
+
+    :param sisend: Sisaldab kasutajatele sisestatud andmeid
+    :param find: Sisestab kasutaja andmed (DataFrame)
+    """
     while True:
         sisend=str(input("Sisesta teie kasutaja nimi või e-posti adress: "))
         find = find_user_data(sisend)
@@ -156,9 +202,15 @@ def unustanud_parooli_taastamine()->any:
         else:
             return False
 
-
 def oma_andme_muutmine(kasutaja:str)->any:
-    find = find_user_data(kasutaja)
+    """
+    Funktsioon võimaldab muuta kasutaja andmeid, kes seda funktsiooni kasutab.
+    Funktsioon kasutab funktsioon update_user_data, et uuendada kasutaja andmeid.
+
+    :param uusnimi: Sisestab uus kasutaja nimi
+    :param uusemail: Sisestab uus email
+    :param uusparool: Sisestab uus parool
+    """
     while True:
         s=int(input("Valige mis tahate muutuda (nimi - 1 / email - 2 / parool - 3 / väljuda - 0\n"))
         if s==1:
@@ -192,3 +244,102 @@ def oma_andme_muutmine(kasutaja:str)->any:
             break
         else:
             continue
+
+        
+def näita_koik_kasutajate_andmed()->any:
+    """
+    Funktsioon näitab kõiki andmeid failist
+    """
+    print(pd.read_csv('kasutajate_andmed.csv'))
+
+def user_to_file_by_template(kasutaja, email, parool):
+    """
+    Funktsioon võimaldab salvestada uue kasutaja andmed faili, kui faili ei ole see loob uue faili.
+
+    :param filename: Sisestab faili nimi, kus asuvad kasutajate andmed.
+    :param data_template: Sisestab mall et kirjutada uus kasutaja failisse.
+    :param kasutaja: Sisestab kasutajanimi
+    :param email: Sisestab email
+    :param parool: Sisestab parool.
+    """
+    filename = 'kasutajate_andmed.csv'
+    data_template = pd.DataFrame({
+        'Kasutaja': [kasutaja],
+        'Email': [email],
+        'Parool': [parool]
+    })
+    if os.path.exists(filename):
+        data_template.to_csv(filename, mode='a', header=False, index=False)
+    else:
+        data_template.to_csv(filename, index=False)
+
+def find_user_data(data):
+    """
+    Funktsioon otsib antud kasutaja andmed failis ja kõik kasutaja andmed kelle andmed leiab.
+    
+    :param user_data: Põhjustab leitud andmete salvestamise konteineri
+    :param find: Lugege komadega eraldatud väärtuste (csv) faili DataFrame'i.
+    """
+    file=pd.read_csv('kasutajate_andmed.csv')
+    user_data=pd.DataFrame(columns=file.columns) #
+    for index, row in file.iterrows():
+        for c in file.columns:
+            if data in str(row[c]):
+                user_data = pd.concat([user_data, row.to_frame().T], ignore_index=True)
+                break
+    if user_data.empty:
+        print()
+    else:
+        return user_data.iloc[0]
+    
+def update_user_data(kasutaja, new_data, change, new_username=None):
+    """
+    Funktsioon võimaldab uuenda olulist kasutajate anmed.
+    Tagastab True või False.
+
+    :param filename: Sisestab andmefaili nimi
+    :param kasutaja: Sisestab kasutaja nimi, kes anmed muutume.
+    :param newdata: Sisestab uus andmed mis vaja kirjutada failis.
+    :param change: Sisestab kasutaja andmete kategooria nimi, mida tahame muuta
+    """
+    try:
+        filename = 'kasutajate_andmed.csv'
+        file = pd.read_csv(filename)
+        if kasutaja not in file['Kasutaja'].values:
+            print(f"Kasutaja {kasutaja} ei leidnud.")
+            return False
+        if new_username is not None:
+            file.loc[file['Kasutaja'].str.strip() == kasutaja, 'Kasutaja'] = new_username
+        if change in file.columns and change != 'Kasutaja':
+            file.loc[file['Kasutaja'].str.strip() == kasutaja, change] = new_data
+        else:
+            return False
+        file.to_csv(filename, index=False)
+        return True
+    except: return False
+
+def write_data_from_list() -> any:
+    """
+    Funktsioon kasutatakse faili täitmiseks kasutajate andmetega (ei ole kohustuslik).
+    """
+    kasutajad=["Anna","Grisha","Sasha","Daniil","Eren"]
+    paroolid=[]
+    emailid=[]
+    for i in range(len(kasutajad)):
+        paroolid.append(salasona_genereerimine())
+        emailid.append(str(kasutajad[i])+"@tthk.ee")
+    filename = 'kasutajate_andmed.csv'
+    if os.path.exists(filename):
+        kasutajate_andmed = pd.read_csv(filename)
+        for i in range(len(kasutajad)):
+            if kasutajad[i] in kasutajate_andmed['Kasutaja'].values:
+                print(f"Kasutaja {kasutajad[i]} on juba olemas. Andmed pole lisatud")
+                continue
+            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
+        return True
+    else:
+        for i in range(len(kasutajad)):
+            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
+        return True
+
+
