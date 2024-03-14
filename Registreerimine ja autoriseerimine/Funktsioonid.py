@@ -1,10 +1,21 @@
-﻿import string
+import string
 import random
 import smtplib,ssl
 from email.message import EmailMessage
-from os import system
-import pandas as pd
 import os
+import pandas as pd
+
+def start():
+    if os.path.exists('kasutajate_andmed.csv'):
+        return ("Andme fail on juba olemas")
+    else:
+        data_template = pd.DataFrame({
+            'Kasutaja': ["1"],
+            'Email': ["1"],
+            'Parool': ["1"]
+        })
+        data_template.to_csv('kasutajate_andmed.csv', index=False)
+        return ("Uus andme fail loodud")
 
 def salasona_genereerimine()->str:
     """
@@ -133,25 +144,31 @@ def autoriseerimine()->any:
 
     """
     while True:
-        kasutajanimi=input("Kasutaja nimi: ")
+        kasutajanimi=str(input("Kasutaja nimi: "))
         find = find_user_data(kasutajanimi)
         if find is not None and not find.empty:
-            if find['Kasutaja']==kasutajanimi :
-                while True:
+            if find['Kasutaja']==kasutajanimi:
+                for i in range(3):
+                    if i==3: return False
                     parool=str(input("Parool: "))
-                    if find['Parool'] == parool:
+                    if find['Parool']==parool:
                         print("Sisselogimine on edukalt!")
-                        return kasutajanimi    
-                    print("Vale parool")
-                    if input("Proovi uuesti? (y/n):").lower()=="y":
-                        continue
-                    else:
-                        return False
-        print("Kasutaja ei leidnud")
-        if input("Proovi uuesti? (y/n)").lower()=="y":
-            continue
+                        return kasutajanimi
+                    print(f"{3-(i+1)}/3 katset jäänud.")
+                    continue
+                return False
+            print("Kasutaja ei leidnud")
+            if input("Proovi uuesti? (y/n)").lower()=="y":
+                continue
+            else:
+                return False
         else:
-            return False
+            print("Kasutaja ei leidnud")
+            if input("Proovi uuesti? (y/n)").lower()=="y":
+                continue
+            else:
+                return False
+            
         
 
 def send_mail(kasutaja:str, password:str, email:str)->any:
@@ -193,7 +210,7 @@ def unustanud_parooli_taastamine()->any:
     while True:
         sisend=str(input("Sisesta teie kasutaja nimi või e-posti adress: "))
         find = find_user_data(sisend)
-        if find is not None and not find.empty:
+        if find['Kasutaja']==sisend or find['Email']==sisend:
             send_mail(find['Kasutaja'],find['Parool'],find['Email'])
             print("Teie parool oli saadetud e-postile: ",find['Email'])
             return True
@@ -215,44 +232,47 @@ def oma_andme_muutmine(kasutaja:str)->any:
         s=int(input("Valige mis tahate muutuda (nimi - 1 / email - 2 / parool - 3 / väljuda - 0\n"))
         if s==1:
             while True:
-                uusnimi=(str(input("Uus nimi: ")))
+                uusnimi=str(input("Uus nimi: "))
                 if check_name(uusnimi):
-                    if update_user_data(kasutaja, uusnimi, 'Kasutaja', new_username=uusnimi):
+                    if update_user_data(kasutaja, uusnimi, 'Kasutaja', new_username=True):
                         print("Kasutaja nimi oli muudatud")
-                        print(find_user_data(kasutaja))
-                    break
-                else: continue
+                        kasutaja=uusnimi
+                        break
+                else: 
+                    if input("Proovi uuesti? (y/n):")=="y": continue
+                    else: break
         if s==2:
             while True:
-                uusemail=(str(input("Uus nimi: ")))
+                uusemail=(str(input("Uus email: ")))
                 if check_mail(uusemail):
                     if update_user_data(kasutaja, uusemail, 'Email'):
                         print("Kasutaja email oli muudatud")
-                        print(find_user_data(kasutaja))
-                    break
-                else: continue
+                        break
+                else: 
+                    if input("Proovi uuesti? (y/n):")=="y": continue
+                    else: break
         if s==3:
             while True:
                 uusparool=(str(input("Uus uusparool: ")))
                 if check_password(uusparool):
                     if update_user_data(kasutaja, uusparool, 'Parool'):
                         print("Kasutaja parool oli muudatud")
-                        print(find_user_data(kasutaja))
                         break
-                else: continue
+                else: 
+                    if input("Proovi uuesti? (y/n):")=="y": continue
+                    else: break
         if s==0:
             break
         else:
             continue
 
-        
 def näita_koik_kasutajate_andmed()->any:
     """
     Funktsioon näitab kõiki andmeid failist
     """
     print(pd.read_csv('kasutajate_andmed.csv'))
 
-def user_to_file_by_template(kasutaja, email, parool):
+def user_to_file_by_template(kasutaja, email, pw):
     """
     Funktsioon võimaldab salvestada uue kasutaja andmed faili, kui faili ei ole see loob uue faili.
 
@@ -266,7 +286,7 @@ def user_to_file_by_template(kasutaja, email, parool):
     data_template = pd.DataFrame({
         'Kasutaja': [kasutaja],
         'Email': [email],
-        'Parool': [parool]
+        'Parool': [pw]
     })
     if os.path.exists(filename):
         data_template.to_csv(filename, mode='a', header=False, index=False)
@@ -281,7 +301,7 @@ def find_user_data(data):
     :param find: Lugege komadega eraldatud väärtuste (csv) faili DataFrame'i.
     """
     file=pd.read_csv('kasutajate_andmed.csv')
-    user_data=pd.DataFrame(columns=file.columns) #
+    user_data=pd.DataFrame(columns=file.columns)
     for index, row in file.iterrows():
         for c in file.columns:
             if data in str(row[c]):
@@ -292,7 +312,7 @@ def find_user_data(data):
     else:
         return user_data.iloc[0]
     
-def update_user_data(kasutaja, new_data, change, new_username=None):
+def update_user_data(kasutaja, new_data, change, new_username=False):
     """
     Funktsioon võimaldab uuenda olulist kasutajate anmed.
     Tagastab True või False.
@@ -308,38 +328,18 @@ def update_user_data(kasutaja, new_data, change, new_username=None):
         if kasutaja not in file['Kasutaja'].values:
             print(f"Kasutaja {kasutaja} ei leidnud.")
             return False
-        if new_username is not None:
-            file.loc[file['Kasutaja'].str.strip() == kasutaja, 'Kasutaja'] = new_username
-        if change in file.columns and change != 'Kasutaja':
-            file.loc[file['Kasutaja'].str.strip() == kasutaja, change] = new_data
-        else:
-            return False
-        file.to_csv(filename, index=False)
-        return True
-    except: return False
-
-def write_data_from_list() -> any:
-    """
-    Funktsioon kasutatakse faili täitmiseks kasutajate andmetega (ei ole kohustuslik).
-    """
-    kasutajad=["Anna","Grisha","Sasha","Daniil","Eren"]
-    paroolid=[]
-    emailid=[]
-    for i in range(len(kasutajad)):
-        paroolid.append(salasona_genereerimine())
-        emailid.append(str(kasutajad[i])+"@tthk.ee")
-    filename = 'kasutajate_andmed.csv'
-    if os.path.exists(filename):
-        kasutajate_andmed = pd.read_csv(filename)
-        for i in range(len(kasutajad)):
-            if kasutajad[i] in kasutajate_andmed['Kasutaja'].values:
-                print(f"Kasutaja {kasutajad[i]} on juba olemas. Andmed pole lisatud")
-                continue
-            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
-        return True
-    else:
-        for i in range(len(kasutajad)):
-            user_to_file_by_template(kasutajad[i], emailid[i], paroolid[i])
-        return True
-
-
+        if change in file.columns:
+            if new_username is not False:
+                file.loc[file['Kasutaja'].str.strip() == kasutaja, 'Kasutaja'] = new_data
+                file.to_csv(filename, index=False)
+                return True
+            if change != 'Kasutaja':
+                file.loc[file['Kasutaja'].str.strip() == kasutaja, change] = new_data
+                file.to_csv(filename, index=False)
+                return True
+            else:
+                print("fail")
+                return False
+    except: 
+        print("except")
+        return False
